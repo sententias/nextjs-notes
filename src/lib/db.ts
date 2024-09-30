@@ -1,14 +1,6 @@
 import { Pool, PoolClient } from 'pg';
 import { DateTime } from 'luxon';
 
-type NoteType = {
-  id?: number;
-  created_at?: string;
-  updated_at?: string;
-  title?: string | null;
-  body?: string | null;
-};
-
 const pool = new Pool({
   user: 'notesadmin',
   host: 'localhost',
@@ -48,9 +40,9 @@ export const query = async (sql: string) => {
  * @description 查询表中的全部结果
  * @param {string} table 查询表名
  */
-export const getAll = async (table: string) => {
+export const getAll = async (table: string): Promise<NoteType[]> => {
   const result = await withConnection(async (client) => {
-    const res = await client.query(`SELECT * FROM ${table}`);
+    const res = await client.query(`SELECT * FROM ${table};`);
     return res.rows;
   });
   return result;
@@ -59,9 +51,9 @@ export const getAll = async (table: string) => {
 /**
  * @description 获取侧边栏需要的数据
  */
-export const getMenuList = async () => {
+export const getMenuList = async (): Promise<NoteType[]> => {
   const result = await withConnection(async (client) => {
-    const res = await client.query(`SELECT id, title, updated_at FROM notes`);
+    const res = await client.query(`SELECT id, title, updated_at FROM notes;`);
     return res.rows;
   });
   return result;
@@ -72,11 +64,14 @@ export const getMenuList = async () => {
  * @param {number} id 笔记对应的 id
  * @param {string} table 查询表名
  */
-export const getById = async (id: number, table: string) => {
+export const getById = async (id: number | undefined, table: string):Promise<NoteType> => {
+  if(id === undefined){
+    throw Error('不存在该笔记');
+  }
   const result = await withConnection(async (client) => {
     // 使用了参数化查询，确保安全性
     const res = await client.query(
-      `SELECT * FROM ${table} WHERE ${table}.id = \$1`,
+      `SELECT * FROM ${table} WHERE ${table}.id = \$1;`,
       [id]
     );
     return res.rows;
@@ -86,13 +81,13 @@ export const getById = async (id: number, table: string) => {
 
 export const insertNote = async (note: NoteType) => {
   // 格式化当前时间
-  const currentTime = DateTime.local().toFormat('YYYY-MM-DD HH:mm:ss'); 
+  const currentTime = DateTime.local().toISO();
 
   // 插入数据的 SQL 语句
   const query = `
     INSERT INTO notes (title, body, created_at, updated_at) 
     VALUES (\$1, \$2, \$3, \$4) 
-    RETURNING id
+    RETURNING id;
   `;
 
   const values = [note.title, note.body, currentTime, currentTime];

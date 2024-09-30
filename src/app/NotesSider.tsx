@@ -10,7 +10,7 @@ export const NotesSider: React.FC = ({
 }) => {
   return (
     // 全局侧边栏
-    <Sider className={styles['main-menu-sider']}>
+    <Sider className={styles['main-menu-sider']} theme='light'>
       <Flex
         vertical
         gap='small'
