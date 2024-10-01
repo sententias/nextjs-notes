@@ -6,6 +6,7 @@ import SiderMenu from './SiderMenu';
 import NotesSearch from './NotesSearch';
 import NewnoteButton from './NewnoteButton';
 
+// 侧边栏整体结构
 export const NotesSider: React.FC = ({
 }) => {
   return (

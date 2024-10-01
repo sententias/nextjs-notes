@@ -61,12 +61,12 @@ export const getMenuList = async (): Promise<NoteType[]> => {
 
 /**
  * @description 通过 ID 获取笔记详细信息
- * @param {number} id 笔记对应的 id
+ * @param {string} id 笔记对应的 id
  * @param {string} table 查询表名
  */
-export const getById = async (id: number | undefined, table: string):Promise<NoteType> => {
-  if(id === undefined){
-    throw Error('不存在该笔记');
+export const getById = async (id: string, table: string):Promise<NoteType[]> => {
+  if(id === ''){
+    return [];
   }
   const result = await withConnection(async (client) => {
     // 使用了参数化查询，确保安全性

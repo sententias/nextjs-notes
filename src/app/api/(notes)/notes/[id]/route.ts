@@ -10,7 +10,7 @@ export async function GET(
 ) {
   const { id } = params;
 
-  const note = await getById(parseInt(id), 'notes');
+  const note = await getById(id, 'notes');
 
   return NextResponse.json(note, { status: 200 });
 }

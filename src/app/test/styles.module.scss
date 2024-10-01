@@ -1,0 +1,19 @@
+.edit-box{
+  display: flex;
+  justify-content: space-between;
+  gap: 5vw;
+
+  .edit-content{
+    width: 55vw;
+
+    .textarea{
+      min-height: 75vh ;
+    }
+  }
+
+  .edit-domin{
+    flex:1;
+    align-self: self-start;
+
+  }
+}

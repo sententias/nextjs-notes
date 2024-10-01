@@ -1,4 +1,16 @@
-
 .menu-collapse{
   width: 100% !important;
+  user-select: none;
+
+  svg{
+    z-index: 1 !important;
+    transition: 0.2s ease-out;
+    &:hover{
+      // border: 5px solid #1677ff;
+      background-color: #1677ff;
+      color: white;
+      border-radius: 50%;
+      
+    }
+  }
 }

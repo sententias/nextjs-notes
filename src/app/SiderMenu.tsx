@@ -4,6 +4,8 @@ import { getAll, getMenuList } from '@/lib/db';
 import MenuNotesItem from './MenuNotesItem';
 import style from './SiderMenuStyles.module.scss';
 
+// 侧边栏中菜单项
+
 // 获取菜单子项类型
 // 使用 [number] 可以提取数组中某个单独元素的类型，而不需要将整个数组都包括在内。
 type MenuItem = Required<MenuProps>['items'][number];
@@ -43,7 +45,7 @@ export const SiderMenu = async () => {
   const menuItems = await getDBList();
   return (
     <Menu
-    // 由于antd的默认菜单项是固定高度，用于通过CSS选择器实现伸缩菜单项
+    // 由于antd的默认菜单项是固定高度，设置类名通过CSS选择器实现伸缩菜单项
     /**
      * #collapse-menu-item {
      *   li {

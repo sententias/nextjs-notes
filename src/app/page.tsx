@@ -1,12 +1,12 @@
-import NotesDetails from "./notes/[id]/page";
-import EditNote from "./notes/edit/[id]/page";
+import React from 'react'
+import Home from '@/app/Home';
 
-export default function Home() {
-  return (
-    <div>
-      Click a note on the left to view something! 🥺
-      {/* <NotesDetails/> */}
-      {/* <EditNote/> */}
-    </div>
-  );
+export const Page = () => {
+  // TODO 非常不优雅，但是找了半天不到解决办法
+  // extjs的app router，动态路由的值在TS中需要被显式地指定，但是这会导致动态路由的值无法正确传递
+  return(
+    <Home params={{id:'-1'}} />
+  )
 }
+
+export default Page

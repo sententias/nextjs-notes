@@ -37,7 +37,7 @@ export default function RootLayout({
           <Layout style={{ height: '100vh', overflow: 'hidden' }}>
             {/* 侧边栏 */}
             <NotesSider />
-            {/* 内容展示 */}
+            {/* 功能页面 */}
             <Layout>
               <NoteContent>{children}</NoteContent>
             </Layout>
