@@ -1,7 +1,7 @@
 type NoteType = {
-  id?: number;
-  createdAt?: string;
-  updatedAt?: string;
+  id?: string;
+  created_at?: string;
+  updated_at?: string;
   title?: string | null;
   body?: string | null;
 };

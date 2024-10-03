@@ -2,7 +2,6 @@ import { Breadcrumb } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import React from 'react';
 import styles from '@/app/NoteContentStyles.module.scss';
-import NotePreview from './notes/[id]/page';
 
 type NoteContentType = {
   children: React.ReactNode;

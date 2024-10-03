@@ -1,14 +1,19 @@
 import { getById } from '@/lib/db';
 import NotePreview from './NotePreview';
-import { Button, Flex, Space } from 'antd';
+import { Button } from 'antd';
 import Link from 'next/link';
 
-export default async function Home({ params }: { params: { id: string } }) {
-  const { id } = params;
+type HomeType = {
+  params?: {
+    id:string;
+  }
+}
+
+export default async function Home({ params }: HomeType) {
+  const id = params ? params.id : '';
   // 通过动态路由获取数据
   const note = await getById(id, 'notes');
 
-  // console.log('note', note);
   if (note.length === 0) {
     return (
       <div className='note--empty-state'>
@@ -19,18 +24,28 @@ export default async function Home({ params }: { params: { id: string } }) {
     );
   }
   return (
-    <Flex
-      gap='middle'
-      justify='space-between'
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap:'20px'
+      }}
     >
-      <NotePreview note={note[0]} />
+      <div
+        style={{
+          flex: '1'
+        }}
+      >
+        <NotePreview note={note[0]} />
+      </div>
+
       <Button
         type='primary'
         className='new-note-button'
         size='large'
       >
-        <Link href='/'>新建笔记</Link>
+        <Link href={`/edit/${note[0].id}`}>编辑笔记</Link>
       </Button>
-    </Flex>
+    </div>
   );
 }
